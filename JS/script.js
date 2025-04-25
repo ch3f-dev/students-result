@@ -64,13 +64,12 @@ const t1Body = document.createElement('tbody');
 
 const t1HeadRow = document.createElement('tr');  //row for the table head
 // this loop creates an array of values to get the head titles
-['Name', 'Class', 'Score'].forEach(text => {
+['Name', 'Class', 'Score', 'Grade'].forEach(text => {
     const th = document.createElement('th'); // the heading 
     th.textContent = text; // this tells the loop to use the value of each item in the array as its innerText
     th.classList.add('border', 'px-4', 'py-2', 'text-center');
     t1HeadRow.appendChild(th);
     t1Head.appendChild(t1HeadRow);
-
 });
 
 
@@ -89,8 +88,45 @@ studentRegister.forEach(student => {
         tr.appendChild(td);
     });
 
+    let grade = '';
+    let gradeColour = '';
+
+    if (student.score <= 39) {
+        grade = 'F';
+        gradeColour = 'text-red-500';
+    } else if
+        (student.score >= 40 && student.score <= 44) {
+        grade = 'E';
+        gradeColour = 'text-orange-500';
+    } else if
+        (student.score >= 45 && student.score <= 49) {
+        grade = 'D';
+        gradeColour = 'text-yellow-500';
+    } else if
+        (student.score >= 50 && student.score <= 59) {
+        grade = 'C';
+        gradeColour = 'text-green-500';
+    } else if
+        (student.score >= 60 && student.score <= 69) {
+        grade = 'B';
+        gradeColour = 'text-blue-500';
+    } else if
+        (student.score >= 70) {
+        grade = 'A';
+        gradeColour = 'text-black';
+    };
+
+    if (grade) {
+        const td = document.createElement('td');
+        td.textContent = grade;
+        td.classList.add('border', 'px-4', 'py-2', 'text-center', gradeColour, 'font-bold');
+        tr.appendChild(td);
+    }
+
     t1Body.appendChild(tr);
 });
+
+
 
 
 
@@ -99,7 +135,35 @@ t1.appendChild(t1Body);
 main.appendChild(t1);
 
 
+const t2 = document.createElement('table'); //the second table containing all students
+const t2Head = document.createElement('thead'); //its header
+const t2Body = document.createElement('tbody');
+
+const t2HeadRow = document.createElement('tr');
+['Name', 'Class', 'Score'].forEach(text => {
+    const th = document.createElement('th');
+    th.textContent = text;
+    th.classList.add('border', 'px-4', 'py-2', 'text-center');
+    t2HeadRow.appendChild(th);
+    t2Head.appendChild(t2HeadRow);   
+});
+
+
+studentRegister.forEach(student => {
+    const tr = document.createElement('tr');
+    Object.values(student).forEach(value => {
+        const td = document.createElement('td');
+        if (value.score )
+        td.textContent = value;
+        td.classList.add('border', 'px-4', 'py-2', 'text-center');
+
+
+    })
+})
+
 outerWrapper.appendChild(main);
+
+
 
 
 
