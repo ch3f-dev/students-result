@@ -57,9 +57,61 @@ outerWrapper.appendChild(header);
 const main = document.createElement('main');
 main.classList.add('bg-blue-200');
 
+// creating tables and their contents
+const t1 = document.createElement('table'); //the first table containing all students
+const t1Head = document.createElement('thead'); //its header
+const t1Body = document.createElement('tbody');
+
+const t1HeadRow = document.createElement('tr');  //row for the table head
+// this loop creates an array of values to get the head titles
+['Name', 'Class', 'Score'].forEach(text => {
+    const th = document.createElement('th'); // the heading 
+    th.textContent = text; // this tells the loop to use the value of each item in the array as its innerText
+    th.classList.add('border', 'px-4', 'py-2', 'text-center');
+    t1HeadRow.appendChild(th);
+    t1Head.appendChild(t1HeadRow);
+
+});
+
+
+// creating the t1 body
+studentRegister.forEach(student => {
+    const tr = document.createElement('tr');
+
+    Object.values(student).forEach((value, index) => { //this Object.value is an object method that returns all the value of an object as an array. I used two parameters because I want to style the values at index 0
+        const td = document.createElement('td');
+        td.textContent = value;
+        td.classList.add('border', 'px-4', 'py-2', 'text-center');
+
+        if (index === 0) {
+            td.classList.add('font-bold');
+        };
+        tr.appendChild(td);
+    });
+
+    t1Body.appendChild(tr);
+});
+
+
+
+t1.appendChild(t1Head);
+t1.appendChild(t1Body);
+main.appendChild(t1);
+
 
 outerWrapper.appendChild(main);
+
+
+
 const footer = document.createElement('footer');
+
+const footerLink = document.createElement('a');
+footerLink.href = 'https://github.com/ch3f-dev';
+footerLink.textContent = 'Click here to visit my Github';
+footerLink.target = '_blank';
+
+footer.appendChild(footerLink);
+outerWrapper.appendChild(footer);
 
 
 
