@@ -19,7 +19,7 @@ const studentRegister = [
     {name: 'Nzem Berom', class: 'web 2', score: 90},
     {name: 'Plateau Jos', class: 'web 3', score: 90},
     {name: 'Jonah Fish', class: 'web 1', score: 90},
-    {name: 'Shark Dolphin', class: 'web 2', score: 90},
+    {name: 'Shark Dolphin', class: 'web 2', score: 44},
     {name: 'King David', class: 'web 3', score: 90},
     
 ];
@@ -27,6 +27,7 @@ const studentRegister = [
 
 const body = document.getElementsByTagName('body');
 const outerWrapper = document.querySelector('.outerWrapper');
+
 
 // creating the header
 const header = document.createElement('header');
@@ -90,6 +91,8 @@ const t1 = document.createElement('table'); //the first table containing all stu
 t1.classList.add('mb-10');
 const t1Head = tableHeaders(['S/N', 'Name', 'Class', 'Score', 'Grade']); //its header
 const t1Body = document.createElement('tbody');
+
+
 
 
 let serialNo = 1;
@@ -163,22 +166,32 @@ main.appendChild(t1);
 
 
 const t2 = document.createElement('table'); //the second table containing all students
-const t2Head = document.createElement('thead'); //its header
-const t2Body = document.createElement('tbody');
+const t2Head = tableHeaders(['S/N', 'Name', 'Class', 'Score']); //its header
+const t2Body = document.createElement('tbody') //its body
 
-const t2HeadRow = document.createElement('tr');
-['S/N', 'Name', 'Class', 'Score'].forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    th.classList.add('border', 'px-4', 'py-2', 'text-center');
-    t2HeadRow.appendChild(th);
-    t2Head.appendChild(t2HeadRow);   
-});
 
-function t2data() {
+const t3 = document.createElement('table'); //the third table containing all students
+const t3Head = tableHeaders(['S/N', 'Name', 'Class', 'Score']); //its header
+const t3Body = document.createElement('tbody') //its body
+
+const t4 = document.createElement('table'); //the fourth table containing all students
+const t4Head = tableHeaders(['S/N', 'Name', 'Class', 'Score']); //its header
+const t4Body = document.createElement('tbody') //its body
+
+const t5 = document.createElement('table'); //the fifth table containing all students
+const t5Head = tableHeaders(['S/N', 'Name', 'Class', 'Score']); //its header
+const t5Body = document.createElement('tbody') //its body
+
+const t6 = document.createElement('table'); //the sixth table containing all students
+const t6Head = tableHeaders(['S/N', 'Name', 'Class', 'Score']); //its header
+const t6Body = document.createElement('tbody') //its body
+
+
+// this function generates table bodies for different categories of grades
+function tableBodies(tableBody, condition) {
     let serialNo = 1;
     studentRegister.forEach(student => {
-        if (student.score <= 39) {
+        if (condition(student)) {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.textContent = serialNo++;
@@ -188,25 +201,42 @@ function t2data() {
             Object.values(student).forEach(value => {
                 const td = document.createElement('td');
                 td.textContent = value;
-                td.classList.add('border', 'px-4', 'py-2', 'text-center');
+                td.classList.add('border', 'px-10', 'py-2', 'text-center');
                 tr.appendChild(td);
             });
-            t2Body.appendChild(tr);
+            tableBody.appendChild(tr);
         }
-
-
     });
+};
 
-}
-t2data();
+tableBodies(t2Body, student => student.score <= 39);
+tableBodies(t3Body, student => student.score >= 40 && student.score <= 44);
+tableBodies(t4Body, student => student.score >= 45 && student.score <= 49);
+tableBodies(t5Body, student => student.score >= 50 && student.score <= 59);
+tableBodies(t6Body, student => student.score >= 60 && student.score <= 69);
 
 
  
 t2.appendChild(t2Head);
 t2.appendChild(t2Body);
+t3.appendChild(t3Head);
+t3.appendChild(t3Body);
+t4.appendChild(t4Head);
+t4.appendChild(t4Body);
+t5.appendChild(t5Head);
+t5.appendChild(t5Body);
+t6.appendChild(t6Head);
+t6.appendChild(t6Body);
+
 main.appendChild(t2);
+main.appendChild(t3);
+main.appendChild(t4);
+main.appendChild(t5);
+main.appendChild(t6);
+
 
 outerWrapper.appendChild(main);
+
 
 
 
